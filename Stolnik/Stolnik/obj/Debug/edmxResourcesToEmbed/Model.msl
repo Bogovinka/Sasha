@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseModelContainer" CdmEntityContainer="DatabaseEntities">
+    <EntitySetMapping Name="Equipment">
+      <EntityTypeMapping TypeName="DatabaseModel.Equipment">
+        <MappingFragment StoreEntitySet="Equipment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquipmentType">
+      <EntityTypeMapping TypeName="DatabaseModel.EquipmentType">
+        <MappingFragment StoreEntitySet="EquipmentType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DatabaseModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WarehouseEquipment">
+      <EntityTypeMapping TypeName="DatabaseModel.WarehouseEquipment">
+        <MappingFragment StoreEntitySet="WarehouseEquipment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WarehouseEquipmentS">
+      <EntityTypeMapping TypeName="DatabaseModel.WarehouseEquipmentS">
+        <MappingFragment StoreEntitySet="WarehouseEquipmentS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,26 @@
+CREATE TABLE Users(
+	ID int primary key identity(1,1),
+	Login nvarchar(250),
+	Password nvarchar(250));
+
+INSERT INTO Users VALUES ('user', 'user');
+
+CREATE TABLE EquipmentType(
+	ID int primary key identity(1,1),
+	Name nvarchar(250));
+	
+INSERT INTO EquipmentType VALUES (N'Принтер'), (N'ПК'), (N'Кассовое оборудование');
+	
+CREATE TABLE Equipment(
+	ID int primary key identity(1,1),
+	Name nvarchar(250),
+	Serial_num nvarchar(250),
+	TypeID int foreign key references EquipmentType(ID));
+	
+CREATE TABLE WarehouseEquipment(
+	ID int primary key identity(1,1),
+	EquipmentID int foreign key references Equipment(ID));
+	
+CREATE TABLE WarehouseEquipmentS(
+	ID int primary key identity(1,1),
+	EquipmentID int foreign key references Equipment(ID));

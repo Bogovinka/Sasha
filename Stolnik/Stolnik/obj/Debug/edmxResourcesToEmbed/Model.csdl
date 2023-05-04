@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Serial_num" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TypeID" Type="Int32" />
+    <NavigationProperty Name="EquipmentType" Relationship="Self.FK__Equipment__TypeI__3A81B327" FromRole="Equipment" ToRole="EquipmentType" />
+    <NavigationProperty Name="WarehouseEquipment" Relationship="Self.FK__Warehouse__Equip__3D5E1FD2" FromRole="Equipment" ToRole="WarehouseEquipment" />
+    <NavigationProperty Name="WarehouseEquipmentS" Relationship="Self.FK__Warehouse__Equip__403A8C7D" FromRole="Equipment" ToRole="WarehouseEquipmentS" />
+  </EntityType>
+  <EntityType Name="EquipmentType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__TypeI__3A81B327" FromRole="EquipmentType" ToRole="Equipment" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="WarehouseEquipment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EquipmentID" Type="Int32" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK__Warehouse__Equip__3D5E1FD2" FromRole="WarehouseEquipment" ToRole="Equipment" />
+  </EntityType>
+  <EntityType Name="WarehouseEquipmentS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EquipmentID" Type="Int32" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK__Warehouse__Equip__403A8C7D" FromRole="WarehouseEquipmentS" ToRole="Equipment" />
+  </EntityType>
+  <Association Name="FK__Equipment__TypeI__3A81B327">
+    <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EquipmentType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Warehouse__Equip__3D5E1FD2">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+    <End Role="WarehouseEquipment" Type="Self.WarehouseEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WarehouseEquipment">
+        <PropertyRef Name="EquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Warehouse__Equip__403A8C7D">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+    <End Role="WarehouseEquipmentS" Type="Self.WarehouseEquipmentS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WarehouseEquipmentS">
+        <PropertyRef Name="EquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+    <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="WarehouseEquipment" EntityType="Self.WarehouseEquipment" />
+    <EntitySet Name="WarehouseEquipmentS" EntityType="Self.WarehouseEquipmentS" />
+    <AssociationSet Name="FK__Equipment__TypeI__3A81B327" Association="Self.FK__Equipment__TypeI__3A81B327">
+      <End Role="EquipmentType" EntitySet="EquipmentType" />
+      <End Role="Equipment" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Warehouse__Equip__3D5E1FD2" Association="Self.FK__Warehouse__Equip__3D5E1FD2">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="WarehouseEquipment" EntitySet="WarehouseEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Warehouse__Equip__403A8C7D" Association="Self.FK__Warehouse__Equip__403A8C7D">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="WarehouseEquipmentS" EntitySet="WarehouseEquipmentS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

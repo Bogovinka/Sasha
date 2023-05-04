@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Serial_num" Type="nvarchar" MaxLength="250" />
+          <Property Name="TypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="250" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="WarehouseEquipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentID" Type="int" />
+        </EntityType>
+        <EntityType Name="WarehouseEquipmentS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Equipment__TypeI__3A81B327">
+          <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Equip__3D5E1FD2">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="WarehouseEquipment" Type="Self.WarehouseEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WarehouseEquipment">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Equip__403A8C7D">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="WarehouseEquipmentS" Type="Self.WarehouseEquipmentS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WarehouseEquipmentS">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DatabaseModelContainer">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseEquipment" EntityType="Self.WarehouseEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseEquipmentS" EntityType="Self.WarehouseEquipmentS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Equipment__TypeI__3A81B327" Association="Self.FK__Equipment__TypeI__3A81B327">
+            <End Role="EquipmentType" EntitySet="EquipmentType" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Equip__3D5E1FD2" Association="Self.FK__Warehouse__Equip__3D5E1FD2">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="WarehouseEquipment" EntitySet="WarehouseEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Equip__403A8C7D" Association="Self.FK__Warehouse__Equip__403A8C7D">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="WarehouseEquipmentS" EntitySet="WarehouseEquipmentS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Serial_num" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" />
+          <NavigationProperty Name="EquipmentType" Relationship="Self.FK__Equipment__TypeI__3A81B327" FromRole="Equipment" ToRole="EquipmentType" />
+          <NavigationProperty Name="WarehouseEquipment" Relationship="Self.FK__Warehouse__Equip__3D5E1FD2" FromRole="Equipment" ToRole="WarehouseEquipment" />
+          <NavigationProperty Name="WarehouseEquipmentS" Relationship="Self.FK__Warehouse__Equip__403A8C7D" FromRole="Equipment" ToRole="WarehouseEquipmentS" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__TypeI__3A81B327" FromRole="EquipmentType" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WarehouseEquipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentID" Type="Int32" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Warehouse__Equip__3D5E1FD2" FromRole="WarehouseEquipment" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="WarehouseEquipmentS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentID" Type="Int32" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Warehouse__Equip__403A8C7D" FromRole="WarehouseEquipmentS" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="FK__Equipment__TypeI__3A81B327">
+          <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Equip__3D5E1FD2">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="WarehouseEquipment" Type="Self.WarehouseEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WarehouseEquipment">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Equip__403A8C7D">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="WarehouseEquipmentS" Type="Self.WarehouseEquipmentS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WarehouseEquipmentS">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WarehouseEquipment" EntityType="Self.WarehouseEquipment" />
+          <EntitySet Name="WarehouseEquipmentS" EntityType="Self.WarehouseEquipmentS" />
+          <AssociationSet Name="FK__Equipment__TypeI__3A81B327" Association="Self.FK__Equipment__TypeI__3A81B327">
+            <End Role="EquipmentType" EntitySet="EquipmentType" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Equip__3D5E1FD2" Association="Self.FK__Warehouse__Equip__3D5E1FD2">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="WarehouseEquipment" EntitySet="WarehouseEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Equip__403A8C7D" Association="Self.FK__Warehouse__Equip__403A8C7D">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="WarehouseEquipmentS" EntitySet="WarehouseEquipmentS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseModelContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="DatabaseModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentType">
+            <EntityTypeMapping TypeName="DatabaseModel.EquipmentType">
+              <MappingFragment StoreEntitySet="EquipmentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DatabaseModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseEquipment">
+            <EntityTypeMapping TypeName="DatabaseModel.WarehouseEquipment">
+              <MappingFragment StoreEntitySet="WarehouseEquipment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseEquipmentS">
+            <EntityTypeMapping TypeName="DatabaseModel.WarehouseEquipmentS">
+              <MappingFragment StoreEntitySet="WarehouseEquipmentS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
